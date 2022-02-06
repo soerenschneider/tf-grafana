@@ -21,8 +21,8 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "id": 67,
-  "iteration": 1644157205113,
+  "id": 82,
+  "iteration": 1644163466632,
   "links": [],
   "liveNow": false,
   "panels": [
@@ -539,6 +539,77 @@
             "mode": "absolute",
             "steps": [
               {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "yellow",
+                "value": 43200
+              },
+              {
+                "color": "green",
+                "value": 86400
+              }
+            ]
+          },
+          "unit": "s"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 3,
+        "x": 6,
+        "y": 6
+      },
+      "id": 31,
+      "options": {
+        "colorMode": "background",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "last"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto"
+      },
+      "pluginVersion": "8.3.4",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${datasource}"
+          },
+          "exemplar": false,
+          "expr": "min(ssh_key_signer_cert_expiry_seconds) - time()",
+          "instant": true,
+          "interval": "",
+          "legendFormat": "",
+          "refId": "A"
+        }
+      ],
+      "title": "Next SSH Cert Expiration",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${datasource}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
                 "color": "red",
                 "value": null
               },
@@ -559,7 +630,7 @@
       "gridPos": {
         "h": 4,
         "w": 3,
-        "x": 6,
+        "x": 9,
         "y": 6
       },
       "id": 26,
@@ -622,7 +693,7 @@
       "gridPos": {
         "h": 4,
         "w": 3,
-        "x": 9,
+        "x": 12,
         "y": 6
       },
       "id": 27,
@@ -685,7 +756,7 @@
       "gridPos": {
         "h": 4,
         "w": 3,
-        "x": 12,
+        "x": 15,
         "y": 6
       },
       "id": 28,
@@ -1109,6 +1180,7 @@
       "type": "bargauge"
     }
   ],
+  "refresh": "30m",
   "schemaVersion": 34,
   "style": "dark",
   "tags": [],
@@ -1135,13 +1207,13 @@
     ]
   },
   "time": {
-    "from": "now-15m",
+    "from": "now-24h",
     "to": "now"
   },
   "timepicker": {},
   "timezone": "",
   "title": "Vault Usage",
   "uid": "d15Cf7-nz",
-  "version": 16,
+  "version": 2,
   "weekStart": ""
 }
