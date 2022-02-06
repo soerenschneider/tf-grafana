@@ -1,0 +1,51 @@
+apiVersion: 1
+
+providers:
+- name: 'Infrastructure'
+  orgId: 1
+  folder: 'infra'
+  type: file
+  disableDeletion: false
+  updateIntervalSeconds: 60
+  options:
+    path: /etc/grafana/provisioning/dashboards/infra
+- name: 'Apps'
+  orgId: 1
+  folder: 'apps'
+  type: file
+  disableDeletion: false
+  updateIntervalSeconds: 60
+  options:
+    path: /etc/grafana/provisioning/dashboards/apps
+- name: 'IOT'
+  orgId: 1
+  folder: 'iot'
+  type: file
+  disableDeletion: false
+  updateIntervalSeconds: 60
+  options:
+    path: /etc/grafana/provisioning/dashboards/iot
+- name: 'Kubernetes'
+  orgId: 1
+  folder: 'kubernetes'
+  type: file
+  disableDeletion: false
+  updateIntervalSeconds: 60
+  options:
+    path: /etc/grafana/provisioning/dashboards/kubernetes
+- name: 'Monitoring'
+  orgId: 1
+  folder: 'monitoring'
+  type: file
+  disableDeletion: false
+  updateIntervalSeconds: 60
+  options:
+    path: /etc/grafana/provisioning/dashboards/monitoring
+- name: 'Meta'
+  orgId: 1
+  folder: 'meta'
+  type: file
+  disableDeletion: false
+  updateIntervalSeconds: 60
+  options:
+    path: /etc/grafana/provisioning/dashboards/meta
