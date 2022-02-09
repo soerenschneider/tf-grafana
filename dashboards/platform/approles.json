@@ -22,7 +22,7 @@
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
   "id": 82,
-  "iteration": 1644163466632,
+  "iteration": 1644435594444,
   "links": [],
   "liveNow": false,
   "panels": [
@@ -375,6 +375,77 @@
       "type": "stat"
     },
     {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${datasource}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "#EAB839",
+                "value": 129600
+              },
+              {
+                "color": "red",
+                "value": 6220800
+              }
+            ]
+          },
+          "unit": "s"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 3,
+        "x": 15,
+        "y": 1
+      },
+      "id": 33,
+      "options": {
+        "colorMode": "background",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto"
+      },
+      "pluginVersion": "8.3.4",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${datasource}"
+          },
+          "exemplar": false,
+          "expr": "max(time() - vault_approle_rotation_invocation_timestamp_seconds)",
+          "instant": true,
+          "interval": "",
+          "legendFormat": "",
+          "refId": "A"
+        }
+      ],
+      "title": "Max AppRole Invocation",
+      "type": "stat"
+    },
+    {
       "collapsed": false,
       "gridPos": {
         "h": 1,
@@ -473,11 +544,11 @@
               },
               {
                 "color": "#EAB839",
-                "value": 33
+                "value": 25
               },
               {
                 "color": "green",
-                "value": 50
+                "value": 33
               }
             ]
           },
@@ -539,16 +610,12 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
+                "color": "red",
                 "value": null
               },
               {
-                "color": "yellow",
-                "value": 43200
-              },
-              {
                 "color": "green",
-                "value": 86400
+                "value": 21800
               }
             ]
           },
@@ -615,11 +682,11 @@
               },
               {
                 "color": "#EAB839",
-                "value": 33
+                "value": 25
               },
               {
                 "color": "green",
-                "value": 50
+                "value": 33
               }
             ]
           },
@@ -887,6 +954,7 @@
             "mode": "thresholds"
           },
           "mappings": [],
+          "max": 86400,
           "min": 0,
           "thresholds": {
             "mode": "absolute",
@@ -907,13 +975,13 @@
         "x": 12,
         "y": 11
       },
-      "id": 13,
+      "id": 32,
       "options": {
-        "displayMode": "basic",
+        "displayMode": "gradient",
         "orientation": "horizontal",
         "reduceOptions": {
           "calcs": [
-            "last"
+            "lastNotNull"
           ],
           "fields": "",
           "values": false
@@ -928,14 +996,14 @@
             "uid": "${datasource}"
           },
           "exemplar": false,
-          "expr": "vault_approle_rotation_expiration_time_timestamp_seconds - vault_approle_rotation_creation_time_timestamp_seconds",
+          "expr": "sort_desc(time() - vault_approle_rotation_invocation_timestamp_seconds)",
           "instant": true,
           "interval": "",
           "legendFormat": "{{ role_name }}",
           "refId": "A"
         }
       ],
-      "title": "AppRole Expiry Period",
+      "title": "Last Invocation",
       "type": "bargauge"
     },
     {
@@ -1028,12 +1096,74 @@
       "type": "timeseries"
     },
     {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${datasource}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          },
+          "unit": "s"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 15,
+        "w": 12,
+        "x": 12,
+        "y": 26
+      },
+      "id": 13,
+      "options": {
+        "displayMode": "basic",
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [
+            "last"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showUnfilled": true
+      },
+      "pluginVersion": "8.3.4",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${datasource}"
+          },
+          "exemplar": false,
+          "expr": "vault_approle_rotation_expiration_time_timestamp_seconds - vault_approle_rotation_creation_time_timestamp_seconds",
+          "instant": true,
+          "interval": "",
+          "legendFormat": "{{ role_name }}",
+          "refId": "A"
+        }
+      ],
+      "title": "AppRole Expiry Period",
+      "type": "bargauge"
+    },
+    {
       "collapsed": false,
       "gridPos": {
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 34
+        "y": 41
       },
       "id": 10,
       "panels": [],
@@ -1079,7 +1209,7 @@
         "h": 15,
         "w": 12,
         "x": 0,
-        "y": 35
+        "y": 42
       },
       "id": 2,
       "options": {
@@ -1146,7 +1276,7 @@
         "h": 15,
         "w": 12,
         "x": 12,
-        "y": 35
+        "y": 42
       },
       "id": 4,
       "options": {
@@ -1214,6 +1344,6 @@
   "timezone": "",
   "title": "Vault Usage",
   "uid": "d15Cf7-nz",
-  "version": 2,
+  "version": 4,
   "weekStart": ""
 }
