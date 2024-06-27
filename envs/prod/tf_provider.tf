@@ -2,7 +2,12 @@ terraform {
   required_providers {
     grafana = {
       source  = "grafana/grafana"
-      version = "2.14.3"
+      version = "3.2.1"
+    }
+
+    vault = {
+      source  = "hashicorp/vault"
+      version = "4.2.0"
     }
   }
 
@@ -13,7 +18,12 @@ terraform {
   }
 }
 
+provider "vault" {
+  address = "http://localhost:8200"
+  token   = "test"
+}
+
 provider "grafana" {
-  url  = "https://grafana.soeren.cloud"
-  auth = var.grafana_auth
+  url  = "http://localhost:3000"
+  auth = "admin:admin"
 }

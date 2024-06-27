@@ -7,7 +7,18 @@ locals {
 
 module "folders" {
   for_each        = local.dashboards
-  source          = "../../modules/folder"
+  source          = "../../modules/grafana-folder"
   folder_name     = each.key
   dashboard_files = each.value
+}
+
+module "service_accounts" {
+  source           = "../../modules/grafana-service-accounts"
+  service_accounts = var.service_accounts
+}
+
+module "vault" {
+  source           = "../../modules/vault"
+  service_accounts = module.service_accounts.service_accounts
+  env              = "prod"
 }
