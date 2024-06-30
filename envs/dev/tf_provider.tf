@@ -25,12 +25,6 @@ terraform {
       enforced = true
     }
   }
-
-  backend "s3" {
-    bucket = "soerenschneider-terraform"
-    key    = "grafana-prd"
-    region = "us-east-1"
-  }
 }
 
 provider "vault" {
@@ -39,5 +33,6 @@ provider "vault" {
 }
 
 provider "grafana" {
-  url = "http://localhost:3000"
+  url  = "http://localhost:3000"
+  auth = "admin:admin"
 }

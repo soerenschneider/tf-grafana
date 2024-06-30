@@ -6,16 +6,16 @@ ENV="${1:-prod}"
 
 echo "Running tofu apply for env ${ENV}"
 
-MARIADB_SECRET_PATH="infra/selfhosted/dbs/mariadb-${ENV}"
-TF_SECRET_PATH="infra/selfhosted/terraform-state/tf-mariadb-${ENV}"
+GRAFANA_SECRET_PATH="infra/selfhosted/grafana-${ENV}"
+TF_SECRET_PATH="infra/selfhosted/terraform-state/tf-grafana-${ENV}"
 
-echo "Reading mariadb credentials..."
-OUTPUT=$(pass "${MARIADB_SECRET_PATH}")
-MYSQL_USERNAME=$(echo "${OUTPUT}" | grep ^MYSQL_USER= | cut -d'=' -f2)
-export MYSQL_USERNAME
+echo "Reading grafana credentials..."
+OUTPUT=$(pass "${GRAFANA_SECRET_PATH}")
+GRAFANA_USERNAME=$(echo "${OUTPUT}" | grep ^GRAFANA_USERNAME= | cut -d'=' -f2)
+GRAFANA_PASSWORD=$(echo "${OUTPUT}" | grep ^GRAFANA_PASSWORD= | cut -d'=' -f2)
 
-MYSQL_PASSWORD=$(echo "${OUTPUT}" | grep ^MYSQL_PASSWORD= | cut -d'=' -f2)
-export MYSQL_PASSWORD
+GRAFANA_AUTH="${GRAFANA_USERNAME}:${GRAFANA_PASSWORD}"
+export GRAFANA_AUTH
 
 echo "Reading opentofu state encryption key..."
 OUTPUT=$(pass "${TF_SECRET_PATH}")

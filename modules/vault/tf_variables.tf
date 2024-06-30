@@ -21,23 +21,18 @@ variable "vault_kv2_mount" {
   }
 }
 
-variable "vault_path_prefix" {
+variable "path_prefix" {
   type    = string
   default = "grafana"
 
   validation {
-    condition     = length(var.vault_path_prefix) >= 3 && !strcontains(var.vault_path_prefix, "/")
-    error_message = "vault_path_prefix must be more than 2 characters and must not contain slashes."
+    condition     = length(var.path_prefix) >= 3
+    error_message = "path_prefix must be more than 2 characters."
   }
-}
-
-variable "env" {
-  type        = string
-  description = "Used to build the path of the secret."
 
   validation {
-    condition     = length(var.env) >= 3 && !strcontains(var.env, "/")
-    error_message = "env must be more than 2 characters and must not contain slashes."
+    condition     = !(startswith(var.path_prefix, "/") || endswith(var.path_prefix, "/"))
+    error_message = "Invalid path_prefix: must not start or end with a slash ('/')."
   }
 }
 
