@@ -1,8 +1,9 @@
 # tf-grafana
 
-![terratest](https://github.com/soerenschneider/tf-grafana/actions/workflows/terratest.yaml/badge.svg)
+![gitleaks](https://github.com/soerenschneider/tf-grafana/actions/workflows/gitleaks.yaml/badge.svg)
 ![lint-workflow](https://github.com/soerenschneider/tf-grafana/actions/workflows/lint.yaml/badge.svg)
 ![security-workflow](https://github.com/soerenschneider/tf-grafana/actions/workflows/security.yaml/badge.svg)
+![terratest](https://github.com/soerenschneider/tf-grafana/actions/workflows/terratest.yaml/badge.svg)
 
 This repository implements Infrastructure as Code (IaC) using [OpenTofu](https://opentofu.org/) to configure Grafana instances and write service account credentials to Hashicorp Vault.
 
