@@ -27,7 +27,7 @@ No modules.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| <a name="input_service_accounts"></a> [service\_accounts](#input\_service\_accounts) | n/a | <pre>list(object({<br>    name    = string,<br>    role    = string,<br>    enabled = optional(bool)<br>  }))</pre> | n/a | yes |
+| <a name="input_service_accounts"></a> [service\_accounts](#input\_service\_accounts) | n/a | <pre>list(object({<br/>    name    = string,<br/>    role    = string,<br/>    enabled = optional(bool)<br/>  }))</pre> | n/a | yes |
 
 ## Outputs
 
