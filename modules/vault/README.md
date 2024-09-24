@@ -28,7 +28,7 @@ No modules.
 |------|-------------|------|---------|:--------:|
 | <a name="input_metadata"></a> [metadata](#input\_metadata) | Optional metadata to attach to the secret. | `map(any)` | `null` | no |
 | <a name="input_path_prefix"></a> [path\_prefix](#input\_path\_prefix) | n/a | `string` | `"grafana"` | no |
-| <a name="input_service_accounts"></a> [service\_accounts](#input\_service\_accounts) | n/a | <pre>list(<br>    object({<br>      name  = string,<br>      token = string<br>  }))</pre> | n/a | yes |
+| <a name="input_service_accounts"></a> [service\_accounts](#input\_service\_accounts) | n/a | <pre>list(<br/>    object({<br/>      name  = string,<br/>      token = string<br/>  }))</pre> | n/a | yes |
 | <a name="input_vault_kv2_mount"></a> [vault\_kv2\_mount](#input\_vault\_kv2\_mount) | n/a | `string` | `"secret"` | no |
 
 ## Outputs
