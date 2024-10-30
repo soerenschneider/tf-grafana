@@ -1,6 +1,7 @@
 locals {
-  env     = basename(abspath(path.module))
-  folders = toset(flatten([for _, v in flatten(fileset(path.module, "../../dashboards/**")) : regex("^../../dashboards/([[:alnum:]]+)", v)]))
+  instance                     = basename(abspath(path.module))
+  password_store_paths_default = ["env/${local.instance}/grafana/serviceaccount/%s"]
+  folders                      = toset(flatten([for _, v in flatten(fileset(path.module, "../../dashboards/**")) : regex("^../../dashboards/([[:alnum:]]+)", v)]))
   dashboards = {
     for _, folder in local.folders : folder => fileset(abspath(path.module), "../../dashboards/${folder}/*.json")
   }
@@ -14,12 +15,16 @@ module "folders" {
 }
 
 module "service_accounts" {
-  source           = "../../modules/grafana-service-accounts"
-  service_accounts = var.service_accounts
+  for_each             = { for sa in var.service_accounts : sa.name => sa }
+  source               = "../../modules/grafana-service-accounts"
+  service_account      = each.value
+  password_store_paths = coalescelist(each.value.password_store_paths, var.password_store_paths, local.password_store_paths_default)
 }
 
 module "vault" {
-  source           = "../../modules/vault"
-  service_accounts = nonsensitive(module.service_accounts.service_accounts)
-  path_prefix      = "env/${local.env}/grafana"
+  for_each             = module.service_accounts
+  source               = "../../modules/vault"
+  service_account      = nonsensitive(each.value.service_account)
+  password_store_paths = coalescelist(each.value.password_store_paths, var.password_store_paths, local.password_store_paths_default)
+  metadata             = {}
 }

@@ -1,12 +1,10 @@
 resource "grafana_service_account" "account" {
-  for_each    = { for x in var.service_accounts : x.name => x }
-  name        = each.key
-  role        = each.value.role
-  is_disabled = each.value.enabled
+  name        = var.service_account.name
+  role        = var.service_account.role
+  is_disabled = try(!var.service_account.enabled, false)
 }
 
 resource "grafana_service_account_token" "token" {
-  for_each           = { for x in var.service_accounts : x.name => x }
-  name               = each.key
-  service_account_id = grafana_service_account.account[each.key].id
+  name               = var.service_account.name
+  service_account_id = grafana_service_account.account.id
 }

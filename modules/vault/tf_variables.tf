@@ -1,13 +1,39 @@
-variable "service_accounts" {
-  type = list(
-    object({
-      name  = string,
-      token = string
-  }))
+variable "service_account" {
+  type = object({
+    name  = string,
+    token = string
+  })
 
   validation {
-    condition     = alltrue([for x in var.service_accounts : length(x.name) > 3 && length(x.token) >= 20])
-    error_message = "vault_kv2_mount should not end with a slash."
+    condition     = length(var.service_account.name) > 5 && length(var.service_account.token) >= 20
+    error_message = "access key's name must be > 5 and token must be >= 20"
+  }
+}
+
+variable "password_store_paths" {
+  type        = list(string)
+  description = "Paths to write the secret to."
+
+  validation {
+    condition = alltrue([
+      for path in var.password_store_paths : length(path) >= 5
+    ])
+    error_message = "Each path in password_store_paths must be at least 5 characters long."
+  }
+
+  validation {
+    condition = alltrue([
+      for path in var.password_store_paths :
+      !startswith(path, "/") && !endswith(path, "/")
+    ])
+    error_message = "Each path in password_store_paths must not start or end with a slash ('/')."
+  }
+
+  validation {
+    condition = alltrue([
+      for path in var.password_store_paths : can(regex("%s", path))
+    ])
+    error_message = "Each path in password_store_paths must contain the substring '%s'."
   }
 }
 
@@ -18,21 +44,6 @@ variable "vault_kv2_mount" {
   validation {
     condition     = !endswith(var.vault_kv2_mount, "/") && length(var.vault_kv2_mount) > 3
     error_message = "vault_kv2_mount should not end with a slash."
-  }
-}
-
-variable "path_prefix" {
-  type    = string
-  default = "grafana"
-
-  validation {
-    condition     = length(var.path_prefix) >= 3
-    error_message = "path_prefix must be more than 2 characters."
-  }
-
-  validation {
-    condition     = !(startswith(var.path_prefix, "/") || endswith(var.path_prefix, "/"))
-    error_message = "Invalid path_prefix: must not start or end with a slash ('/')."
   }
 }
 
