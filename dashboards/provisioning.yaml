@@ -17,14 +17,6 @@ providers:
   updateIntervalSeconds: 60
   options:
     path: /etc/grafana/provisioning/dashboards/infra
-- name: 'Kubernetes'
-  orgId: 1
-  folder: 'kubernetes'
-  type: file
-  disableDeletion: false
-  updateIntervalSeconds: 60
-  options:
-    path: /etc/grafana/provisioning/dashboards/kubernetes
 - name: 'Meta'
   orgId: 1
   folder: 'meta'
