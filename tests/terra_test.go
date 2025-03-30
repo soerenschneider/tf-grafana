@@ -49,7 +49,7 @@ func TestTerragrunt(t *testing.T) {
 	defer terraform.Destroy(t, terraformOptions)
 	terraform.Apply(t, terraformOptions)
 
-	secret, err := readVaultSecret(vaultUrl, vaultToken, "secret/data/env/dev/grafana/serviceaccounts/testcase")
+	secret, err := readVaultSecret(vaultUrl, vaultToken, "secret/data/env/dev/grafana/serviceaccount/testcase")
 	assert.NoError(t, err)
 	assert.Contains(t, secret, "token")
 
