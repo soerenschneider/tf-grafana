@@ -3,15 +3,13 @@ name: Build and Push Docker Image
 
 on:
   push:
-    paths:
-      - Dockerfile
     branches:
       - main
   workflow_dispatch: {}
 
 env:
   REGISTRY: ghcr.io
-  IMAGE_NAME: "grafana"
+  IMAGE_NAME: "soerenschneider/grafana"
 
 jobs:
   build:
