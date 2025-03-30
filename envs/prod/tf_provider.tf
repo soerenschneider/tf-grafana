@@ -33,5 +33,5 @@ provider "vault" {
 }
 
 provider "grafana" {
-  url  = "https://grafana.svc.pt.soeren.cloud"
+  url = "https://grafana.svc.pt.soeren.cloud"
 }
