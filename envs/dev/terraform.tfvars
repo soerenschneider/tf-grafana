@@ -1,6 +1,6 @@
 service_accounts = [
   {
-    name                 = "testcase",
-    role                 = "Editor"
+    name = "testcase",
+    role = "Editor"
   }
 ]
