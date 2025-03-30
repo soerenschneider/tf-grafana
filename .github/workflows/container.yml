@@ -16,6 +16,9 @@ env:
 jobs:
   build:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      packages: write
 
     steps:
       - name: Checkout repository
@@ -45,9 +48,6 @@ jobs:
 
       - name: Build and push container image
         uses: docker/build-push-action@v4.2.1
-        permissions:
-          contents: write
-          packages: write
         with:
           context: .
           push: true
