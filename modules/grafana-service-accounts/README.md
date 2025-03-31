@@ -4,13 +4,13 @@
 | Name | Version |
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.7.0 |
-| <a name="requirement_grafana"></a> [grafana](#requirement\_grafana) | 3.2.1 |
+| <a name="requirement_grafana"></a> [grafana](#requirement\_grafana) | 3.22.0 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| <a name="provider_grafana"></a> [grafana](#provider\_grafana) | 3.2.1 |
+| <a name="provider_grafana"></a> [grafana](#provider\_grafana) | 3.22.0 |
 
 ## Modules
 
@@ -20,8 +20,8 @@ No modules.
 
 | Name | Type |
 |------|------|
-| [grafana_service_account.account](https://registry.terraform.io/providers/grafana/grafana/3.2.1/docs/resources/service_account) | resource |
-| [grafana_service_account_token.token](https://registry.terraform.io/providers/grafana/grafana/3.2.1/docs/resources/service_account_token) | resource |
+| [grafana_service_account.account](https://registry.terraform.io/providers/grafana/grafana/3.22.0/docs/resources/service_account) | resource |
+| [grafana_service_account_token.token](https://registry.terraform.io/providers/grafana/grafana/3.22.0/docs/resources/service_account_token) | resource |
 
 ## Inputs
 
